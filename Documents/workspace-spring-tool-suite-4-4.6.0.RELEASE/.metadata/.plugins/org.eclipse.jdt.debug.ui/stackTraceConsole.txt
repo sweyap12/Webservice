@@ -1,0 +1,11 @@
+String expected_json_string = "{\"AllEmployeeDetails\":[{\"id\":\"1\",\"name\":\"A\"},{\"id\":\"2\",\"name\":\"B\"},{\"id\":\"4\",\"name\":\"C\"}]}";
+	
+		// Creating a Hashmap from JSON String
+        Map<String, Object> retMap = new Gson().fromJson(
+        		expected_json_string, new TypeToken<HashMap<String, Object>>() {}.getType()
+        	);
+        
+        
+        // Creating a JSON object
+        JSONObject jsonobj = new JSONObject();
+        jsonobj.putAll(retMap);

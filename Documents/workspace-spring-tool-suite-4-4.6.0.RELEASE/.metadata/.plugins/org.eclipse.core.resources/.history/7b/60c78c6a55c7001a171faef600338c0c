@@ -1,0 +1,27 @@
+package com.demo.example.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+//import Test.courseapi.Employee;
+
+import Test.courseapi.Employee;
+
+@Repository
+
+@EnableJpaRepositories("com.demo.example.Repository")
+public interface UserRepo extends CrudRepository<Employee, String>
+{
+	List<Employee> findAll();
+	
+	Optional<Employee> findById(String id);
+	
+}
+	
+
+	

@@ -1,0 +1,19 @@
+
+	package Test.courseapi;
+
+import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import com.example.demo.details.EmpDetails;
+
+import Test.courseapi.Employee;
+
+@Repository
+public interface userRepository extends CrudRepository<Employee, String>
+{
+	List<Employee> findAll();
+	
+	List<Employee> findById(String id);
+	
+}
+	

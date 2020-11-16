@@ -1,0 +1,12 @@
+package Test.courseapi;
+
+public class Try {
+
+	public static void main(String[] args) {
+		//String name="AnandhuDev"
+		// TODO Auto-generated method stub
+		System.out.print("/""+"//""+"*"+"//");
+
+	}
+
+}

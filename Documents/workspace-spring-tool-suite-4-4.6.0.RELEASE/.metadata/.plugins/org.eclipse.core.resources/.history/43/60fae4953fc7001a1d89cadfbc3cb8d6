@@ -1,0 +1,128 @@
+package Test.courseapi;
+
+//import java.util.Arrays;
+//import java.util.HashMap;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+
+//import org.json.simple.JSONArray;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.demo.details.EmpDetails;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+
+
+
+@Service
+
+public class EmployeeService{ 
+	
+	@Autowired
+	UserRepo userRepository;
+	public List<Employee>getAllEmps(){
+		return userRepository.findAll();
+	}
+	public List<Employee> getEmps(String id){
+		return userRepository.findById(id);
+}
+	
+	public String addEmp(String id,String name) {
+		Employee detail=new Employee(id,name);
+		userRepository.save(detail);
+		return "Added successfully";
+	}
+
+	public String deleteEmp(String id) {
+		
+		userRepository.deleteById(id);
+		return "Deleted successfully";
+	
+
+}
+	
+	public String updateEmp(String id, Employee detail) {
+	userRepository.save(detail);
+	return "Updated Successfully";}}
+	
+//	 public Employee save(Employee detail) {
+//	        return userRepository.save(detail);
+//	    }
+//	public Optional findById(String id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+//	
+//	public String update(String id,String name){
+//		Optional<Employee> data=Optional.of(new Employee());
+//
+//		
+//		 data=userRepository.findById(id);
+//		 System.out.println(data);
+//		//((List<Employee>)data).setName(name);
+//		 Field [] attributes=data.getClass().getDeclaredFields();
+//		 for(Field field:attributes) {
+//			 System.out.println("Attribute Name:"+field.getName());
+//			 dat a.name="c";
+//			 userRepository.save(data);
+			 
+		 
+		 
+		// return "updated success";
+
+
+
+	//public String updateEmp(String id,Employee detail) {
+	
+//	public String updateEmp(String id,Employee detail) {
+//	    List<Employee> actualEmp= userRepository.findById(detail.getId());
+//	    
+//	
+//		
+//		for(int i=0;i<actualEmp.size();i++)
+//		{
+//			
+//		Employee emp= actualEmp.get(i);
+//		if(emp.getId().equals(id))
+//	{
+//			
+//				actualEmp.set(i,detail);
+//				
+//			}
+//	}
+//		userRepository.save(actualEmp);
+//	return "updated successfully";
+//	
+//	
+//}
+	
+	
+
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+
+package Test.courseapi;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+@Service
+
+public class EmployeeService{ 
+	
+	@Autowired
+	UserRepo userRepository;
+	public List<Employee>getAllEmps(){
+		return userRepository.findAll();
+	}
+	public List getEmps(String id){
+		return userRepository.findById(id);
+}
+	
+	public String addEmp(String id,String name) {
+		Employee detail=new Employee(id,name);
+		userRepository.save(detail);
+		return "Added successfully";
+	}
+
+	public String deleteEmp(String id) {
+		
+		userRepository.deleteById(id);
+		return "Deleted successfully";
+	
+
+}
+	
+	public String updateEmp(String id, Employee detail) {
+	userRepository.save(detail);
+	return "Updated Successfully";}}
+	
+//	 public Employee save(Employee detail) {
+//	        return userRepository.save(detail);
+//	    }
+//	public Optional findById(String id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+//	
+//	public String update(String id,String name){
+//		Optional<Employee> data=Optional.of(new Employee());
+//
+//		
+//		 data=userRepository.findById(id);
+//		 System.out.println(data);
+//		//((List<Employee>)data).setName(name);
+//		 Field [] attributes=data.getClass().getDeclaredFields();
+//		 for(Field field:attributes) {
+//			 System.out.println("Attribute Name:"+field.getName());
+//			 dat a.name="c";
+//			 userRepository.save(data);
+			 
+		 
+		 
+		// return "updated success";
+
+
+
+	//public String updateEmp(String id,Employee detail) {
+	
+//	public String updateEmp(String id,Employee detail) {
+//	    List<Employee> actualEmp= userRepository.findById(detail.getId());
+//	    
+//	
+//		
+//		for(int i=0;i<actualEmp.size();i++)
+//		{
+//			
+//		Employee emp= actualEmp.get(i);
+//		if(emp.getId().equals(id))
+//	{
+//			
+//				actualEmp.set(i,detail);
+//				
+//			}
+//	}
+//		userRepository.save(actualEmp);
+//	return "updated successfully";
+//	
+//	
+//}
+	
+	
+
+
+
+
+
+
+

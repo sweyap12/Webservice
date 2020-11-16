@@ -1,0 +1,7 @@
+package Test.courseapi;
+
+public class Ans {
+String  name="Anandhu Devaraj";
+//String lastname="Devaraj";
+System.out.println("\"name\"");
+}

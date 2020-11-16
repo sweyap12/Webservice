@@ -1,0 +1,75 @@
+package test.courseapi;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+//import org.springframework.security.test.context.support.WithMockUser;
+import Test.courseapi.Employee;
+import Test.courseapi.EmployeeService;
+import Test.courseapi.TopicController;
+@RunWith(SpringRunner.class)
+@WebMvcTest(controllers  = TopicController.class)
+
+public class TryingTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+	@MockBean
+	private EmployeeService empService;
+	@InjectMocks
+	private TopicController topicController;
+
+	
+	@Test
+	public void testMock() throws Exception{
+		
+		String expected_json_string = "{\"EmployeeDetail\":{\"id\":\"1\",\"name\":\"A\"}}";
+		
+		// Creating a Hashmap from JSON String
+        Map<String, Object> retMap = new Gson().fromJson(
+        		expected_json_string, new TypeToken<HashMap<String, Object>>() {}.getType()
+        	);
+        
+        // Creating a JSON object
+        JSONObject jsonobj = new JSONObject();
+        jsonobj.putAll(retMap);
+
+
+    	Mockito.when(empService.getemployees()).thenReturn(jsonobj);
+		
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/employees/")
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        System.out.println(result.getResponse());
+        String expectedJson = "{\"EmployeeDetail\":{\"id\":\"1\",\"name\":\"A\"}}";
+       
+        assertEquals(expectedJson, result.getResponse().getContentAsString());
+    	
+	}
+
+}

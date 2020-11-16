@@ -1,0 +1,52 @@
+package test.courseapi;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.json.JSONException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.junit.jupiter.api.Test;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import Test.courseapi.Employee;
+import Test.courseapi.TopicController;
+
+import static org.mockito.Mockito.*;
+
+import java.io.Reader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class MockTestDemo {
+
+	@Test
+	void test() throws JSONException {
+	//  create mock
+		TopicController mocked_api = mock(TopicController.class);
+		String expected_json_string = "{\"AllEmployeeDetails\":[{\"id\":\"1\",\"name\":\"A\"},{\"id\":\"2\",\"name\":\"B\"},{\"id\":\"4\",\"name\":\"C\"}]}";
+//        org.json.JSONObject expected = new org.json.JSONObject(expected_json_string);
+	
+		// Creating a Hashmap from JSON String
+        Map<String, Object> retMap = new Gson().fromJson(
+        		expected_json_string, new TypeToken<HashMap<String, Object>>() {}.getType()
+        	);
+        
+        // Creating a JSON object
+        JSONObject obbb = new JSONObject();
+        obbb.putAll(retMap);
+
+        // define return value for method getTopics()
+        when(mocked_api.getTopics()).thenReturn(obbb);
+
+        System.out.println(obbb);
+        
+        // use mock in test....
+        assertEquals(mocked_api.getTopics(), obbb);
+	}
+
+}

@@ -1,0 +1,25 @@
+package Test.courseapi;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+
+public interface UserRepo extends CrudRepository<Employee, String> {
+
+	List<Employee> findAll();
+	Optional<Employee> findById(String id);
+	
+	if(Employee.isPresent()){
+	    //developer found, you can get it.
+	    Employee aDeveloper = Employee.();
+	    //aDeveloper.hasSkill(skill); is acessible now.
+	}else{
+	    //no developer found with the specified Id.
+	}
+	
+
+}}

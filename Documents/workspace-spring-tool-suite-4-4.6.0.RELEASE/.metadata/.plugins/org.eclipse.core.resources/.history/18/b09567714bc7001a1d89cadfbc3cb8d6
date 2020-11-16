@@ -1,0 +1,57 @@
+package Test.courseapi;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.details.EmpDetails;
+
+@RestController
+public class TopicController
+{
+	
+	@Autowired
+	private EmployeeService empService;
+	@RequestMapping(method=RequestMethod.GET ,value="employees/")
+	public List<Employee>getAllEmps()
+	{
+		return empService.getAllEmps();
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET ,value="employee/{id}")
+	public List getEmps(@PathVariable String id)
+	{
+		return empService.getEmps(id);
+		
+	}
+
+	@RequestMapping(method=RequestMethod.DELETE ,value="employee/{id}")
+	public String deleteEmp(@PathVariable String id)
+	{
+		return empService.deleteEmp(id);
+		
+	}
+	@RequestMapping(method=RequestMethod.POST , value="employees/")
+	public String addEmp(@RequestBody Employee detail)
+	{
+		return empService.addEmp(detail);
+    }
+	
+	@RequestMapping(method=RequestMethod.PUT , value="employee/{id}")
+	public String updateEmp(@PathVariable String id, @RequestBody Employee detail)
+	{
+		return empService.updateEmp(id, detail);
+    }
+}
+	
+	
+	
+	
+
+	

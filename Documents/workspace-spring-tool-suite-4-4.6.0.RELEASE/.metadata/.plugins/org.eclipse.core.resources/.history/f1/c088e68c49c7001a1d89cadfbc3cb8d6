@@ -1,0 +1,74 @@
+package Test.courseapi;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+
+@RestController
+public class TopicController
+{
+	
+	@Autowired
+	private EmployeeService empService;
+	@RequestMapping(method=RequestMethod.GET ,value="employees/")
+	public List<Employee>getAllEmps()
+	{
+		return empService.getAllEmps();
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET ,value="employee/{id}")
+	public Optional getEmps(@PathVariable String id)
+	{
+		return empService.getEmps(id);
+		
+	}
+
+	@RequestMapping(method=RequestMethod.DELETE ,value="employee/{id}")
+	public String deleteEmp(@PathVariable String id)
+	{
+		return empService.deleteEmp(id);
+		
+	}
+	@RequestMapping(method=RequestMethod.POST,value="employees/")
+	public String addEmp(HttpServletRequest request)
+	{
+		return empService.addEmp(request.getParameter("id"),request.getParameter("name"));
+	
+	}
+
+
+	@PutMapping("employee/{id}")
+//	public String updateEmp(@PathVariable String id,@RequestBody Employee detail)
+//	{
+//		//Employee detail=new Employee(id,name);
+//		
+//		return empService.updateEmp(id,detail);
+	
+	
+	public String updateEmp(@PathVariable String id,@RequestBody Employee detail)
+	{
+		return empService.updateEmp(id,detail);
+		
+	}
+
+}
+	
+	
+	
+	
+
+	

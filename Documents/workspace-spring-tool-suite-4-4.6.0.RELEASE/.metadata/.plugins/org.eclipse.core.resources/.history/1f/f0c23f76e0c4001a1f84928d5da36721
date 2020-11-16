@@ -1,0 +1,32 @@
+package Test.courseapi;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import antlr.collections.List;
+
+@RestController
+public class TopicController
+{
+	
+	@Autowired
+	private EmployeeService empService;
+	@RequestMapping(method=RequestMethod.GET ,value="employees/")
+	public List<Employee>getAllEmps()
+	{
+		return empService.getAllEmps();
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET ,value="employee/{id}")
+	public List<Employee>getAllEmps(@PathVariable String id)
+	{
+		return empService.getAllEmps(id);
+		
+	}
+	
+	
+	
+}
